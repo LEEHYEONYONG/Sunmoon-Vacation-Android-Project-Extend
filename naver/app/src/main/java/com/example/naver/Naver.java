@@ -10,8 +10,9 @@ import java.util.Map;
 
 public class Naver {
     public static String connect(int display, String query) {
-        String clientId = "0uKc2bX8TUys3J5Q4b6U"; //애플리케이션 클라이언트 아이디값"
-        String clientSecret = "pGrV96p8CK"; //애플리케이션 클라이언트 시크릿값"
+        Config c = new Config();
+        String clientId = c.getClientId(); //애플리케이션 클라이언트 아이디값"
+        String clientSecret = c.getClientSecret(); //애플리케이션 클라이언트 시크릿값"
 
         String text = null;
         try {
