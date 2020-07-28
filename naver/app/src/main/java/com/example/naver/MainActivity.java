@@ -1,5 +1,6 @@
 package com.example.naver;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -34,11 +35,14 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     int display = 5;
     String query ="안드로이드";
+    String url ="https://openapi.naver.com/v1/search/news.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setTitle("뉴스검색");
+
         list=findViewById(R.id.list);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            String result = Naver.connect(display,query);
+            String result = Naver.connect(display,query,url);
             System.out.println("result:"+ result);
             return result;
         }
@@ -166,5 +170,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.news:
+                getSupportActionBar().setTitle("뉴스검색");
+                url="https://openapi.naver.com/v1/search/news.json";
+                break;
+            case R.id.cafe:
+                getSupportActionBar().setTitle("카페검색");
+                url="https://openapi.naver.com/v1/search/cafearticle.json";
+                break;
+            case R.id.blog:
+                getSupportActionBar().setTitle("블로그검색");
+                url="https://openapi.naver.com/v1/search/blog.json";
+                break;
+            case R.id.book:
+                Intent intent = new Intent(MainActivity.this,BookActivity.class);
+                startActivity(intent);
+                break;
+        }
+        display=5;
+        new NaverThread().execute();
+        return super.onOptionsItemSelected(item);
     }
 }

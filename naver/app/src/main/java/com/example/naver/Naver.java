@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Naver {
-    public static String connect(int display, String query) {
+    public static String connect(int display, String query, String url) {
         Config c = new Config();
         String clientId = c.getClientId(); //애플리케이션 클라이언트 아이디값"
         String clientSecret = c.getClientSecret(); //애플리케이션 클라이언트 시크릿값"
@@ -21,7 +21,7 @@ public class Naver {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
-        String apiURL = "https://openapi.naver.com/v1/search/news.json?query=" + text;
+        String apiURL = url + "?query=" + text;
         apiURL += "&display="+ display;// json 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
