@@ -57,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent=getIntent();
+        if(intent.getStringExtra("url")!=null){
+            url=intent.getStringExtra("url");
+            getSupportActionBar().setTitle(intent.getStringExtra("title"));
+        }
         new NaverThread().execute();
 
         FloatingActionButton more = findViewById(R.id.more);

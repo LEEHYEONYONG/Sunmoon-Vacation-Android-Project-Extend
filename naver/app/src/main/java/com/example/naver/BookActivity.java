@@ -64,9 +64,37 @@ public class BookActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish();
+        Intent intent = new Intent(BookActivity.this,MainActivity.class);
+        switch (item.getItemId()){
+            case android.R.id.home:
+                break;
+            case R.id.news:
+                getSupportActionBar().setTitle("뉴스검색");
+                url="https://openapi.naver.com/v1/search/news.json";
+                intent.putExtra("url",url);
+                intent.putExtra("title","뉴스검색");
+                break;
+            case R.id.cafe:
+                getSupportActionBar().setTitle("카페검색");
+                url="https://openapi.naver.com/v1/search/cafearticle.json";
+                intent.putExtra("url",url);
+                intent.putExtra("title","카페검색");
+                break;
+            case R.id.blog:
+                getSupportActionBar().setTitle("블로그검색");
+                url="https://openapi.naver.com/v1/search/blog.json";
+                intent.putExtra("url",url);
+                intent.putExtra("title","블로그검색");
+                break;
+
+        }
+        startActivityForResult(intent,1);
+        /*
         if(item.getItemId()==android.R.id.home){
             finish();
         }
+        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -198,4 +226,6 @@ public class BookActivity extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+
 }
