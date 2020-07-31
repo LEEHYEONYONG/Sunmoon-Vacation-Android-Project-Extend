@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#3F51B5"
     android:padding="10sp"
-    android:layout_margin="5sp"
-    android:orientation="vertical">
+    android:layout_margin="5sp">
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -15,12 +14,19 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="장소가 들어갑니다......"/>
+        android:text="장소가 들어갑니다......"
+        android:layout_below="@id/name"/>
     <TextView
         android:id="@+id/tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전화번호가 들어갑니다......"/>
+        android:text="전화번호가 들어갑니다......"
+        android:layout_below="@id/address"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_location_on_24"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/name"/>
 
-
-</LinearLayout>
+</RelativeLayout>

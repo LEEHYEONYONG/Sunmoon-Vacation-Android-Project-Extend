@@ -143,6 +143,7 @@ public class LocalFragment extends Fragment {
                 tel=itemView.findViewById(R.id.tel);
 
 
+
             }
         }
     }

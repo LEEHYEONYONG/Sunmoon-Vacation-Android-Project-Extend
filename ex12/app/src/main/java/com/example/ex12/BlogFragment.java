@@ -1,5 +1,6 @@
 package com.example.ex12;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ public class BlogFragment extends Fragment {
     String query="선문대학교";
     int size = 10;
     ArrayList<HashMap<String,String>> array;
+    RecyclerView list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,10 +80,11 @@ public class BlogFragment extends Fragment {
             //System.out.println("데이터갯수: " + array.size());
 
 
-            RecyclerView list = getActivity().findViewById(R.id.listBlog);
+            list = getActivity().findViewById(R.id.listBlog);
             list.setLayoutManager(new LinearLayoutManager(getActivity()));
             BlogAdapter ad = new BlogAdapter();
             list.setAdapter(ad);
+
 
         }
     }
@@ -135,6 +138,19 @@ public class BlogFragment extends Fragment {
                 super(itemView);
                 title=itemView.findViewById(R.id.title);
                 link=itemView.findViewById(R.id.link);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        HashMap<String,String> map =array.get(getAdapterPosition());
+
+                        Intent intent = new Intent(getActivity(),LocalDetailActivity.class);
+                        intent.putExtra("title",map.get("title"));
+                        intent.putExtra("link",map.get("link"));
+                        startActivity(intent);
+                    }
+                });
+
             }
         }
     }
