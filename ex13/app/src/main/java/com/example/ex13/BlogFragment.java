@@ -39,6 +39,7 @@ public class BlogFragment extends Fragment {
     int page=1;
     int total=0;//검색건수
     boolean is_end;//페이지의 마지막
+
     BlogAdapter blogAdapter = new BlogAdapter();
     RecyclerView listBlog;
     TextView txtTotal;

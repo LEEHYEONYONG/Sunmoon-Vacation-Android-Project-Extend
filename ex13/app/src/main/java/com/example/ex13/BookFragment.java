@@ -1,5 +1,6 @@
 package com.example.ex13;
 
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -137,7 +139,7 @@ public class BookFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull BookAdapter.ViewHolder holder, int position) {
-            HashMap<String,String> map = arrayBook.get(position);
+            final HashMap<String,String> map = arrayBook.get(position);
             holder.title.setText(map.get("title"));
             holder.price.setText(map.get("price")+"원");
             holder.publisher.setText(map.get("publisher"));
@@ -146,6 +148,26 @@ public class BookFragment extends Fragment {
             if(!thumbnail.equals("")){
                 Picasso.with(getActivity()).load(thumbnail).into(holder.thumbnail);
             }
+
+            holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LinearLayout layout=(LinearLayout)getLayoutInflater().inflate(R.layout.item_contents,null);
+                    TextView contents=layout.findViewById(R.id.contents);
+                    contents.setText(map.get("contents"));
+                    ImageView thumbnail= layout.findViewById(R.id.thumbnail);
+                    Picasso.with(getActivity()).load(map.get("thumbnail")).into(thumbnail);
+
+                    AlertDialog.Builder box = new AlertDialog.Builder(getActivity());
+                    box.setTitle("책내용");
+                    box.setPositiveButton("닫기",null);
+                    box.setView(layout);
+                    box.show();
+
+
+                }
+            });
+
         }
 
         @Override
