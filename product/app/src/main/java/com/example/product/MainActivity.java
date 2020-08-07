@@ -2,8 +2,10 @@ package com.example.product;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -119,6 +121,37 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this,ReadActivity.class);
                     intent.putExtra("code",arrayProduct.get(i).getCode());
                     startActivityForResult(intent,1);
+                }
+            });
+
+            final String code = arrayProduct.get(i).getCode();
+            ImageView btnDelete = view.findViewById(R.id.btnDelete);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder box = new AlertDialog.Builder(MainActivity.this);
+                    box.setTitle("질의");
+                    box.setMessage("삭제하실래요?");
+                    box.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Call<Void> call =remoteService.deleteProduct(code);
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    Toast.makeText(MainActivity.this,"삭제완료",Toast.LENGTH_SHORT).show();
+                                    callData(strOrder,strQuery);
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    });
+                    box.setNegativeButton("아니오",null);
+                    box.show();
                 }
             });
             return view;

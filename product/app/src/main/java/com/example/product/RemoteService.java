@@ -29,5 +29,8 @@ public interface RemoteService {
             @Part("price") RequestBody strPrice,
             @Part MultipartBody.Part image);
 
+    @POST("delete.jsp")
+    Call<Void> deleteProduct(@Query("code") String code);
+
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="5sp"
+    android:elevation="3sp">
+
+    <ListView
+        android:id="@+id/listFood"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:dividerHeight="5sp"
+        android:divider="#FFFFFF"/>
+    <Button
+        android:id="@+id/btnLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="현재위치"/>
+
+</LinearLayout>
